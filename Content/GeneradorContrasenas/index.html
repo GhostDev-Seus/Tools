@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🔐 Generador de Contraseñas Seguro</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="text-center mb-6">
+        <h1 class="title">🔐 Generador de Contraseñas</h1>
+        <p class="subtitle">Crea contraseñas seguras en tu navegador</p>
+      </div>
+
+      <!-- Resultado -->
+      <div class="mb-6">
+        <label class="label">Tu contraseña</label>
+        <div class="relative">
+          <input
+            type="text"
+            id="passwordOutput"
+            readonly
+            class="password-output"
+          />
+          <button
+            id="copyBtn"
+            class="copy-btn"
+            title="Copiar al portapapeles"
+          >
+            <i class="fas fa-copy text-gray-600"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Longitud -->
+      <div class="mb-6">
+        <div class="flex justify-between items-center mb-2">
+          <label for="length" class="label">Longitud: <span id="lengthValue">12</span></label>
+          <span class="text-xs text-gray-500">(4–100)</span>
+        </div>
+        <input
+          type="range"
+          id="length"
+          min="4"
+          max="100"
+          value="12"
+          class="slider"
+        />
+      </div>
+
+      <!-- Opciones -->
+      <div class="mb-6">
+        <label class="label mb-3 block">Incluir:</label>
+        <div class="space-y-2">
+          <label class="flex items-center">
+            <input type="checkbox" id="lowercase" checked />
+            <span class="ml-2 text-gray-700">Minúsculas (a-z)</span>
+          </label>
+          <label class="flex items-center">
+            <input type="checkbox" id="uppercase" checked />
+            <span class="ml-2 text-gray-700">Mayúsculas (A-Z)</span>
+          </label>
+          <label class="flex items-center">
+            <input type="checkbox" id="numbers" checked />
+            <span class="ml-2 text-gray-700">Números (0-9)</span>
+          </label>
+          <label class="flex items-center">
+            <input type="checkbox" id="symbols" />
+            <span class="ml-2 text-gray-700">Caracteres especiales (!@#$%^&*)</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Botón generar -->
+      <button
+        id="generateBtn"
+        class="generate-btn"
+      >
+        <i class="fas fa-sync-alt"></i> Generar Contraseña
+      </button>
+
+      <!-- Mensaje -->
+      <div id="message" class="message mt-4 text-center min-h-6"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
