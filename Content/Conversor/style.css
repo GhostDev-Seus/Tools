@@ -1,0 +1,264 @@
+/* --- Tema por defecto: fondo azul/púrpura --- */
+:root {
+  --bg-body: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  --bg-card: white;
+  --text-primary: #333;
+  --text-secondary: #666;
+  --border-color: #ddd;
+  --input-bg: #f9f9f9;
+  --hover-bg: #f0f8ff;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  --btn-swap-bg: #f0f4ff;
+  --btn-swap-hover: #e0e8ff;
+  --footer-color: #888;
+}
+
+/* --- Modo oscuro --- */
+[data-theme="dark"] {
+  --bg-body: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  --bg-card: #1e1e2e;
+  --text-primary: #f0f0f0;
+  --text-secondary: #b0b0b0;
+  --border-color: #444;
+  --input-bg: #2d2d3d;
+  --hover-bg: #2a2a3a;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  --btn-swap-bg: #2a2a3a;
+  --btn-swap-hover: #3a3a4a;
+  --footer-color: #aaa;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #1ccb11 0%, #2575fc 100%);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+}
+
+.container {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 32px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  z-index: 10;
+}
+
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+  color: #2575fc;
+}
+
+.container p {
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  font-size: 1.05rem;
+}
+
+.converter {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.input-group {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.input-group input {
+  padding: 14px;
+  font-size: 1.1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  outline: none;
+  flex: 3;
+  text-align: right;
+  background: var(--input-bg);
+  color: var(--text-primary);
+}
+
+.input-group input:focus {
+  border-color: #2575fc;
+  box-shadow: 0 0 0 2px rgba(37, 117, 252, 0.2);
+}
+
+.custom-select {
+  position: relative;
+  flex: 2;
+}
+
+.selected-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+  background: var(--input-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.2s;
+  justify-content: center;
+  color: var(--text-primary);
+}
+
+.selected-option:hover {
+  border-color: #2575fc;
+  background: var(--hover-bg);
+}
+
+.options-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 240px;
+  overflow-y: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  list-style: none;
+  z-index: 100;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.options-list.show {
+  display: block;
+}
+
+.options-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--text-primary);
+  transition: background 0.2s;
+}
+
+.options-list li:hover {
+  background: var(--hover-bg);
+}
+
+.fi {
+  width: 28px;
+  height: 18px;
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  display: inline-block;
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+}
+
+#swap-btn {
+  align-self: center;
+  background: var(--btn-swap-bg);
+  border: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #2575fc;
+  font-size: 1.3rem;
+  transition: all 0.2s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#swap-btn:hover {
+  background: var(--btn-swap-hover);
+  transform: rotate(45deg);
+}
+
+.rate-info {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-top: 16px;
+  font-style: italic;
+  min-height: 1.5em;
+}
+
+footer {
+  margin-top: 24px;
+  color: var(--footer-color);
+  font-size: 0.85rem;
+}
+
+/* Scroll personalizado */
+.options-list::-webkit-scrollbar {
+  width: 6px;
+}
+.options-list::-webkit-scrollbar-track {
+  background: var(--input-bg);
+}
+.options-list::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+[data-theme="dark"] .options-list::-webkit-scrollbar-thumb {
+  background: #666;
+}
+
+/* --- Botón de modo oscuro en esquina izquierda --- */
+#theme-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+  font-size: 0.9rem;
+}
+
+#theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 24px;
+  }
+  .input-group {
+    flex-direction: column;
+  }
+  .input-group input,
+  .custom-select {
+    width: 100%;
+    flex: 1;
+  }
+  .fi {
+    width: 24px;
+    height: 16px;
+  }
+}

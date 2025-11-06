@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>💱 Conversor de Monedas</title>
+  <meta name="description" content="Conversor de monedas en tiempo real">
+
+  <!-- Flag Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.2.3/css/flag-icons.min.css" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Botón de modo oscuro en esquina izquierda -->
+  <button id="theme-toggle" aria-label="Cambiar tema">
+    <i class="fas fa-moon"></i>
+  </button>
+
+  <div class="container">
+    <h1>💱 Conversor de Monedas</h1>
+    <p>Conversión en tiempo real</p>
+
+    <div class="converter">
+      <div class="input-group">
+        <input
+          type="number"
+          id="amount"
+          value="1"
+          min="0"
+          step="0.01"
+          placeholder="1.00"
+        />
+        <div class="custom-select" id="from-currency-select">
+          <div class="selected-option" id="from-selected">
+            <span class="fi fi-us"></span>
+            <span>USD</span>
+          </div>
+          <ul class="options-list" id="from-options"></ul>
+        </div>
+      </div>
+
+      <button id="swap-btn" aria-label="Intercambiar monedas">
+        <i class="fas fa-exchange-alt"></i>
+      </button>
+
+      <div class="input-group">
+        <input
+          type="text"
+          id="result"
+          readonly
+          placeholder="0.00"
+        />
+        <div class="custom-select" id="to-currency-select">
+          <div class="selected-option" id="to-selected">
+            <span class="fi fi-eu"></span>
+            <span>COP</span>
+          </div>
+          <ul class="options-list" id="to-options"></ul>
+        </div>
+      </div>
+    </div>
+
+    <p id="rate-info" class="rate-info">Cargando tasas de cambio...</p>
+    
+    <footer>
+      <p>Datos en tiempo real · API: exchangerate-api.com</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
