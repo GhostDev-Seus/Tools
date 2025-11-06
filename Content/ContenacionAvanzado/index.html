@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concatenador de Texto</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="main-container">
+        <div class="left-container">
+            <div class="buttons">
+                <button id="concatenate-button"><i class="fas fa-link"></i> Concatenar</button>
+                <button id="clear-button"><i class="fas fa-trash"></i> Limpiar</button>
+                <button id="copy-button" disabled><i class="fas fa-copy"></i> Copiar</button>
+            </div>
+            <div id="shortcut-reminder">
+                <strong>Atajos de teclado:</strong>
+                <ul>
+                    <li><kbd>Q</kbd>: Concatenar</li>
+                    <li><kbd>Z</kbd>: Limpiar</li>
+                    <li><kbd>X</kbd>: Copiar</li>
+                </ul>
+            </div>
+            <div class="theme-switcher-container">
+                <label class="theme-switcher">
+                    <input type="checkbox" id="theme-toggle" aria-label="Cambiar tema claro/oscuro">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        <div class="container">
+            <div class="input-section">
+                <div>
+                    <label for="prefix">Prefijo (Op1):</label>
+                    <input type="text" id="prefix" placeholder="Ej: SELECT * FROM " aria-label="Prefijo para cada línea">
+                </div>
+                <div>
+                    <label for="suffix">Sufijo (Op2):</label>
+                    <input type="text" id="suffix" placeholder="Ej: WHERE id = " aria-label="Sufijo para cada línea">
+                </div>
+            </div>
+            <div class="options-section">
+                <label>Modo de Concatenación:</label>
+                <div class="radio-group">
+                    <input type="radio" id="horizontal" name="mode" checked>
+                    <label for="horizontal">Horizontal</label>
+                    <input type="radio" id="vertical" name="mode">
+                    <label for="vertical">Vertical</label>
+                </div>
+                <label for="separator">Separador:</label>
+                <select id="separator" aria-label="Separador entre líneas concatenadas">
+                    <option value=",">Coma (,)</option>
+                    <option value=";">Punto y coma (;)</option>
+                    <option value="|">Pipe (|)</option>
+                    <option value=" ">Espacio</option>
+                    <option value=", ">Coma + Espacio (, )</option>
+                    <option value="\t">Tabulación (\t)</option>
+                    <option value="\n">Nueva Línea (\n)</option>
+                </select>
+                <label for="quote-type">Tipo de Comillas:</label>
+                <select id="quote-type" aria-label="Tipo de comillas para envolver líneas">
+                    <option value="none">Sin comillas</option>
+                    <option value="single">Comillas simples (')</option>
+                    <option value="double">Comillas dobles (")</option>
+                </select>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="add-final-separator">
+                    <label for="add-final-separator">Agregar separador al final</label>
+                </div>
+            </div>
+            <div class="text-section">
+                <label for="input-text">Texto para concatenar (una línea por entrada):</label>
+                <textarea id="input-text" placeholder="Ingresa líneas aquí..." aria-label="Texto de entrada multilínea" aria-describedby="input-counter-desc"></textarea>
+                <div class="counter" aria-live="polite" id="input-counter-desc">
+                    <span id="input-lines" title="Número de líneas en el texto de entrada (máximo 10,000)">Líneas: 0</span>, 
+                    <span id="input-chars" title="Número total de caracteres en el texto de entrada">Caracteres: 0</span>
+                </div>
+            </div>
+            <div class="text-section">
+                <label for="result-text">Resultado:</label>
+                <textarea id="result-text" readonly aria-label="Resultado concatenado"></textarea>
+                <div class="counter" aria-live="polite">
+                    <span id="result-lines" title="Número de líneas en el resultado">Líneas: 0</span>, 
+                    <span id="result-chars" title="Número total de caracteres en el resultado">Caracteres: 0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
