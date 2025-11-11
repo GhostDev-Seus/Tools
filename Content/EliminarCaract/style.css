@@ -1,0 +1,160 @@
+/* style.css */
+/* Estilos personalizados para mejorar la interfaz sin romper Bootstrap */
+
+/* Fuentes globales */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Tarjeta principal */
+.card {
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Encabezado de tarjeta */
+.card-header {
+  border-bottom: none;
+  border-radius: 16px 16px 0 0 !important;
+  padding: 1.75rem 1.5rem;
+}
+
+/* Botones */
+.btn {
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  padding: 12px 20px;
+  letter-spacing: 0.5px;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+  border: none;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0b5ed7 0%, #0a58c0 100%);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #198754 0%, #157347 100%);
+  border: none;
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #157347 0%, #13663e 100%);
+}
+
+.btn-outline-secondary {
+  border-color: #6c757d;
+  color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: white;
+  border-color: #6c757d;
+}
+
+/* Textarea */
+.form-control {
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Mensaje */
+.alert {
+  border-radius: 12px;
+  border: none;
+  font-weight: 500;
+  padding: 12px 16px;
+  margin-top: 16px;
+}
+
+/* Espaciado y alineación */
+.d-grid > .btn {
+  margin-bottom: 10px;
+}
+
+/* Íconos */
+i {
+  font-size: 1.1rem;
+}
+
+/* Responsive ajustes */
+@media (max-width: 768px) {
+  .card-header {
+    padding: 1.5rem 1rem;
+  }
+
+  .btn {
+    padding: 10px 16px;
+    font-size: 0.95rem;
+  }
+
+  .d-grid > .btn {
+    margin-bottom: 8px;
+  }
+}
+
+/* Animación suave para el fondo */
+.bg-light {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  min-height: 100vh;
+}
+
+/* Mejorar contraste en modo oscuro (opcional) */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
+    color: #e9ecef;
+  }
+
+  .card {
+    background: #2d2d2d;
+    color: #f8f9fa;
+  }
+
+  .form-control {
+    background: #3a3a3a;
+    color: #f8f9fa;
+    border-color: #555;
+  }
+
+  .form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.4);
+  }
+
+  .alert {
+    background-color: #3a3a3a;
+    color: #f8f9fa;
+    border-color: #555;
+  }
+
+  .card-header {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: #f8f9fa;
+  }
+}
