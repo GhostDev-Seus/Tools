@@ -20,18 +20,20 @@
           <div class="card-body">
             <!-- Input de carpeta -->
             <div class="mb-4">
-              <label for="folderName" class="form-label fw-bold">Nombre de la carpeta:</label>
+              <label for="folderName" class="form-label fw-bold">Nombre de la subcarpeta:</label>
               <div class="input-group">
                 <input
                   type="text"
                   id="folderName"
                   class="form-control"
-                  placeholder="Ej: Proyecto"
-                  value="MiProyecto"
+                  placeholder="Ej: components"
                 />
                 <button id="addFolderBtn" class="btn btn-primary">
-                  <i class="fas fa-plus me-2"></i>Agregar Carpeta
+                  <i class="fas fa-plus me-2"></i>Agregar a Carpeta Seleccionada
                 </button>
+              </div>
+              <div class="form-text">
+                Carpeta seleccionada: <strong id="selectedFolderDisplay">Ninguna (raíz)</strong>
               </div>
             </div>
 

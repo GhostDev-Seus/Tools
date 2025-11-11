@@ -70,6 +70,22 @@ body {
   max-height: 300px;
   overflow-y: auto;
   border: 1px solid #ced4da;
+  cursor: pointer;
+}
+
+.folder-tree .folder-item {
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.folder-tree .folder-item:hover {
+  background: #e9ecef;
+}
+
+.folder-tree .folder-item.selected {
+  background: #0d6efd;
+  color: white;
 }
 
 .command-output {

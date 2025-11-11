@@ -9,9 +9,11 @@ const copyBtn = document.getElementById('copyBtn');
 const clearBtn = document.getElementById('clearBtn');
 const messageEl = document.getElementById('message');
 const messageText = document.getElementById('messageText');
+const selectedFolderDisplay = document.getElementById('selectedFolderDisplay');
 
-// Estructura de carpetas
+// Estructura de carpetas: árbol jerárquico
 let folderStructure = [];
+let selectedFolder = null;
 
 // Actualizar árbol de carpetas
 function updateFolderTree() {
@@ -21,16 +23,46 @@ function updateFolderTree() {
     return;
   }
 
-  let tree = '';
+  let html = '';
   let cmd = '';
 
-  folderStructure.forEach(folder => {
-    tree += `📁 ${folder}\n`;
-    cmd += `mkdir "${folder}"\n`;
-  });
+  function renderFolder(folder, level = 0) {
+    const indent = '&nbsp;'.repeat(level * 4);
+    const isSelected = selectedFolder === folder.path;
+    const className = `folder-item ${isSelected ? 'selected' : ''}`;
+    html += `<div class="${className}" data-path="${folder.path}">${indent}📁 ${folder.name}</div>`;
 
-  folderTree.textContent = tree.trim();
+    if (folder.children && folder.children.length > 0) {
+      folder.children.forEach(child => renderFolder(child, level + 1));
+    }
+  }
+
+  folderStructure.forEach(folder => renderFolder(folder));
+
+  folderTree.innerHTML = html;
+
+  // Actualizar comando
+  function generateCommands(folders, parentPath = '') {
+    folders.forEach(folder => {
+      const fullPath = parentPath ? `${parentPath}\\${folder.name}` : folder.name;
+      cmd += `mkdir "${fullPath}"\n`;
+      if (folder.children && folder.children.length > 0) {
+        generateCommands(folder.children, fullPath);
+      }
+    });
+  }
+
+  generateCommands(folderStructure);
   commandOutput.textContent = cmd.trim();
+
+  // Añadir eventos a los elementos del árbol
+  document.querySelectorAll('.folder-item').forEach(item => {
+    item.addEventListener('click', () => {
+      selectedFolder = item.dataset.path;
+      selectedFolderDisplay.textContent = selectedFolder || 'Ninguna (raíz)';
+      updateFolderTree();
+    });
+  });
 }
 
 // Agregar carpeta
@@ -41,12 +73,35 @@ function addFolder() {
     return;
   }
 
-  if (folderStructure.includes(name)) {
-    showMessage('La carpeta ya existe ❌', 'danger');
-    return;
+  const newFolder = {
+    name: name,
+    path: selectedFolder ? `${selectedFolder}\\${name}` : name,
+    children: []
+  };
+
+  if (selectedFolder) {
+    // Buscar la carpeta padre en la estructura
+    function findFolder(folders, path) {
+      for (const folder of folders) {
+        if (folder.path === path) return folder;
+        if (folder.children) {
+          const found = findFolder(folder.children, path);
+          if (found) return found;
+        }
+      }
+      return null;
+    }
+
+    const parentFolder = findFolder(folderStructure, selectedFolder);
+    if (parentFolder) {
+      parentFolder.children.push(newFolder);
+    } else {
+      folderStructure.push(newFolder);
+    }
+  } else {
+    folderStructure.push(newFolder);
   }
 
-  folderStructure.push(name);
   folderNameInput.value = '';
   updateFolderTree();
   showMessage(`Carpeta "${name}" agregada ✅`, 'success');
@@ -77,6 +132,8 @@ function copyToClipboard() {
 // Limpiar todo
 function clearAll() {
   folderStructure = [];
+  selectedFolder = null;
+  selectedFolderDisplay.textContent = 'Ninguna (raíz)';
   folderNameInput.value = '';
   updateFolderTree();
   showMessage('Estructura limpiada ✨', 'secondary');
@@ -91,3 +148,6 @@ clearBtn.addEventListener('click', clearAll);
 folderNameInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') addFolder();
 });
+
+// Inicializar
+updateFolderTree();
