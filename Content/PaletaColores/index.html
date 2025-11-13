@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎨 ChromaFlow — Paleta de Colores Dinámica</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="canvas-overlay"></div>
+  <div class="particles"></div>
+
+  <div class="container-fluid p-0">
+    <div class="main-wrapper">
+      <header class="text-center py-5">
+        <h1 class="display-4 fw-bold text-white mb-2">ChromaFlow</h1>
+        <p class="lead text-light">Genera paletas de colores que fluyen como arte</p>
+      </header>
+
+      <div class="row justify-content-center px-4">
+        <div class="col-lg-10">
+          <div class="card bg-transparent border-0 shadow-2xl">
+            <div class="card-body p-4">
+              <!-- Selector de color base -->
+              <div class="mb-5 text-center">
+                <label class="form-label text-white fw-bold fs-5">Color Base</label>
+                <div class="d-flex justify-content-center align-items-center gap-3">
+                  <input type="color" id="baseColor" class="color-picker" value="#3498db">
+                  <span class="text-white fw-bold" id="baseColorValue">#3498db</span>
+                  <span class="text-light small" id="colorName">Azul Cerúleo</span>
+                </div>
+              </div>
+
+              <!-- Rueda de colores 3D -->
+              <div class="color-wheel-container mb-5">
+                <div class="color-wheel" id="colorWheel">
+                  <!-- Colores generados dinámicamente aquí -->
+                </div>
+              </div>
+
+              <!-- Visualización HSL -->
+              <div class="hsl-preview mb-5">
+                <div class="hsl-circle" id="hslCircle"></div>
+                <div class="hsl-info text-center text-light mt-3">
+                  <span id="hslValue">H: 207°, S: 74%, L: 59%</span>
+                </div>
+              </div>
+
+              <!-- Botones -->
+              <div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
+                <button id="generateBtn" class="btn btn-lg btn-primary btn-shadow">
+                  <i class="fas fa-sync-alt me-2"></i>Generar Nueva Paleta
+                </button>
+                <button id="copyAllBtn" class="btn btn-lg btn-success btn-shadow">
+                  <i class="fas fa-copy me-2"></i>Copiar Paleta
+                </button>
+                <button id="saveBtn" class="btn btn-lg btn-secondary btn-shadow">
+                  <i class="fas fa-save me-2"></i>Guardar Favorita
+                </button>
+              </div>
+
+              <!-- Mensaje de éxito con partículas -->
+              <div id="message" class="alert text-center d-none">
+                <i class="fas fa-check-circle me-2"></i>
+                <span id="messageText"></span>
+              </div>
+
+              <!-- Copia rápida de colores -->
+              <div class="color-cards mt-4 d-flex justify-content-center flex-wrap gap-2">
+                <!-- Aquí se renderizan los colores como tarjetas interactivas -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="text-center py-4">
+        <p class="text-light mb-0">© 2025 ChromaFlow — Diseñado para creadores</p>
+      </footer>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
