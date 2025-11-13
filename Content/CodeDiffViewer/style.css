@@ -76,6 +76,8 @@ textarea {
   border: 1px solid var(--border-color);
   overflow-x: auto;
   height: 300px;
+  font-family: monospace;
+  white-space: pre-wrap;
 }
 
 .diff-output {
@@ -85,14 +87,21 @@ textarea {
   font-family: monospace;
   white-space: pre-wrap;
   overflow-x: auto;
+  line-height: 1.5;
 }
 
 .diff-line.add {
   background-color: var(--highlight-add);
+  color: #aaffaa;
 }
 
 .diff-line.del {
   background-color: var(--highlight-del);
+  color: #ffaaaa;
+}
+
+.diff-line.eq {
+  color: var(--text-light);
 }
 
 @media (max-width: 768px) {
@@ -100,3 +109,12 @@ textarea {
     grid-template-columns: 1fr;
   }
 }
+
+/* Resaltado básico de sintaxis */
+.token.keyword { color: #569cd6; }
+.token.string { color: #ce9178; }
+.token.number { color: #b5cea8; }
+.token.comment { color: #6a9955; opacity: 0.8; }
+.token.function { color: #dcdcaa; }
+.token.operator { color: #d4d4d4; }
+.token.punctuation { color: #d4d4d4; }
