@@ -1,179 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comparador de Código Profesional</title>
-    
-    <!-- Prism.js para syntax highlighting -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
-    
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comparador de Código</title>
+  <link href="styles.css" rel="stylesheet" />
+  <link href="prism.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <h1>
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="16 18 22 12 16 6"></polyline>
-                    <polyline points="8 6 2 12 8 18"></polyline>
-                </svg>
-                Comparador de Código
-            </h1>
-            <div class="header-actions">
-                <button id="themeToggle" class="btn-icon" title="Cambiar tema">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </header>
+  <div class="container">
+    <h1>Comparador de Código</h1>
 
-        <!-- Controls -->
-        <div class="controls">
-            <div class="control-group">
-                <label for="languageSelect">Lenguaje:</label>
-                <select id="languageSelect" class="select">
-                    <option value="javascript">JavaScript</option>
-                    <option value="python">Python</option>
-                    <option value="java">Java</option>
-                    <option value="csharp">C#</option>
-                    <option value="php">PHP</option>
-                    <option value="css">CSS</option>
-                    <option value="html">HTML</option>
-                    <option value="sql">SQL</option>
-                    <option value="typescript">TypeScript</option>
-                    <option value="json">JSON</option>
-                </select>
-            </div>
-            
-            <div class="control-group">
-                <button id="compareBtn" class="btn btn-primary">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="1 4 1 10 7 10"></polyline>
-                        <polyline points="23 20 23 14 17 14"></polyline>
-                        <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
-                    </svg>
-                    Comparar
-                </button>
-                <button id="clearBtn" class="btn btn-secondary">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="3 6 5 6 21 6"></polyline>
-                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                    </svg>
-                    Limpiar
-                </button>
-            </div>
-        </div>
-
-        <!-- Editor Section -->
-        <div class="editor-section">
-            <!-- Left Editor -->
-            <div class="editor-panel">
-                <div class="editor-header">
-                    <h3>Código Original</h3>
-                    <button class="btn-icon copy-btn" data-target="code1" title="Copiar código">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                        </svg>
-                    </button>
-                </div>
-                <textarea 
-                    id="code1" 
-                    class="code-input" 
-                    placeholder="Pega tu código original aquí..."
-                    spellcheck="false"
-                ></textarea>
-            </div>
-
-            <!-- Right Editor -->
-            <div class="editor-panel">
-                <div class="editor-header">
-                    <h3>Código Modificado</h3>
-                    <button class="btn-icon copy-btn" data-target="code2" title="Copiar código">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                        </svg>
-                    </button>
-                </div>
-                <textarea 
-                    id="code2" 
-                    class="code-input" 
-                    placeholder="Pega tu código modificado aquí..."
-                    spellcheck="false"
-                ></textarea>
-            </div>
-        </div>
-
-        <!-- Stats -->
-        <div id="stats" class="stats" style="display: none;">
-            <div class="stat-item stat-added">
-                <span class="stat-label">Líneas agregadas:</span>
-                <span id="addedLines" class="stat-value">0</span>
-            </div>
-            <div class="stat-item stat-removed">
-                <span class="stat-label">Líneas eliminadas:</span>
-                <span id="removedLines" class="stat-value">0</span>
-            </div>
-            <div class="stat-item stat-modified">
-                <span class="stat-label">Líneas modificadas:</span>
-                <span id="modifiedLines" class="stat-value">0</span>
-            </div>
-        </div>
-
-        <!-- Comparison Result -->
-        <div id="comparisonResult" class="comparison-result" style="display: none;">
-            <div class="result-header">
-                <h2>Resultado de la Comparación</h2>
-                <button id="exportBtn" class="btn btn-secondary">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    Exportar Diff
-                </button>
-            </div>
-            
-            <div class="comparison-container">
-                <div class="comparison-panel">
-                    <div class="panel-title">Original</div>
-                    <pre class="line-numbers"><code id="leftCode" class="language-javascript"></code></pre>
-                </div>
-                
-                <div class="comparison-panel">
-                    <div class="panel-title">Modificado</div>
-                    <pre class="line-numbers"><code id="rightCode" class="language-javascript"></code></pre>
-                </div>
-            </div>
-        </div>
+    <div class="controls">
+      <button id="compare-btn">Comparar</button>
+      <label><input type="checkbox" id="inline-toggle" /> Vista en línea</label>
     </div>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="toast"></div>
+    <div class="diff-container">
+      <div class="editor-wrapper">
+        <textarea id="left-code" placeholder="Código original..."></textarea>
+        <pre id="left-output" class="output"><code class="language-javascript"></code></pre>
+      </div>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-csharp.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
-    
-    <script src="script.js"></script>
+      <div class="editor-wrapper">
+        <textarea id="right-code" placeholder="Código modificado..."></textarea>
+        <pre id="right-output" class="output"><code class="language-javascript"></code></pre>
+      </div>
+    </div>
+
+    <div id="diff-output" class="diff-output"></div>
+  </div>
+
+  <script src="prism.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
