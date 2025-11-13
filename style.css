@@ -5,18 +5,19 @@
   box-sizing: border-box;
 }
 
-/* Fondo con gradiente animado */
+/* Fondo blanco puro */
 body {
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
   color: #333;
   line-height: 1.7;
   padding: 20px;
   min-height: 100vh;
+  background: #ffffff; /* Fondo blanco sólido */
   position: relative;
   overflow-x: hidden;
 }
 
-/* Capa de fondo animado */
+/* Capa de fondo difuminado (como en la captura) */
 body::before {
   content: '';
   position: fixed;
@@ -26,39 +27,15 @@ body::before {
   height: 100%;
   z-index: -1;
   background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
-  background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
-  opacity: 0.9;
+  backdrop-filter: blur(60px);
+  -webkit-backdrop-filter: blur(60px);
+  opacity: 0.8;
 }
 
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Opcional: Partículas flotantes */
-body::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  pointer-events: none;
-  background-image: 
-    radial-gradient(circle at 10% 20%, rgba(52, 152, 219, 0.1) 0%, transparent 10%),
-    radial-gradient(circle at 90% 80%, rgba(46, 204, 113, 0.1) 0%, transparent 10%),
-    radial-gradient(circle at 50% 50%, rgba(155, 89, 182, 0.1) 0%, transparent 10%);
-  animation: floatParticles 20s ease-in-out infinite;
-}
-
-@keyframes floatParticles {
-  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.6; }
-  25% { transform: translateY(-20px) translateX(10px); }
-  50% { transform: translateY(0) translateX(-10px); }
-  75% { transform: translateY(20px) translateX(5px); }
+/* Efecto de vidrio en el cuerpo */
+body {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 /* Encabezado mejorado */
@@ -117,6 +94,7 @@ header p {
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
