@@ -1,0 +1,128 @@
+/* ===== RESET & BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f6f9;
+  color: #1a1a1a;
+  line-height: 1.6;
+}
+
+/* ===== LAYOUT ===== */
+.container {
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  font-size: 2rem;
+}
+
+.diff-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.editor-panel {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-header {
+  background: #2c3e50;
+  color: white;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.code-container {
+  position: relative;
+  flex: 1;
+  display: flex;
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow: hidden;
+}
+
+.line-numbers {
+  background: #ecf0f1;
+  color: #7f8c8d;
+  padding: 1rem 0.5rem;
+  text-align: right;
+  user-select: none;
+  min-width: 50px;
+  border-right: 1px solid #ddd;
+}
+
+.code-lines {
+  flex: 1;
+  padding: 1rem 0;
+  overflow-y: auto;
+  white-space: pre;
+}
+
+.line {
+  padding: 0 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+/* ===== TIPOS DE LÍNEAS ===== */
+.line.added {
+  background: #d5efdb;
+}
+.line.removed {
+  background: #fadada;
+}
+.line.modified {
+  background: #fff3cd;
+}
+.line.equal {
+  background: transparent;
+}
+
+/* ===== SCROLL ===== */
+.code-lines::-webkit-scrollbar {
+  width: 8px;
+}
+.code-lines::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.code-lines::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+/* ===== TEXTAREA OCULTA ===== */
+textarea {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .diff-container {
+    flex-direction: column;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comparador de Código - Diff Viewer</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Comparador de Código</h1>
+
+    <div class="diff-container">
+      <!-- Panel Izquierdo -->
+      <div class="editor-panel">
+        <div class="panel-header">Código Original</div>
+        <div class="code-container">
+          <div class="line-numbers" id="leftLineNumbers"></div>
+          <div class="code-lines" id="leftCode"></div>
+        </div>
+        <textarea id="leftInput" placeholder="Pega el código original aquí..." aria-label="Código original"></textarea>
+      </div>
+
+      <!-- Panel Derecho -->
+      <div class="editor-panel">
+        <div class="panel-header">Código Modificado</div>
+        <div class="code-container">
+          <div class="line-numbers" id="rightLineNumbers"></div>
+          <div class="code-lines" id="rightCode"></div>
+        </div>
+        <textarea id="rightInput" placeholder="Pega el código modificado aquí..." aria-label="Código modificado"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
