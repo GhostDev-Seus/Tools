@@ -5,43 +5,24 @@
   box-sizing: border-box;
 }
 
-/* Variables CSS para temas */
+/* Variables CSS para tema oscuro */
 :root {
-  --bg-color: #ffffff;
-  --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
-  --text-color: #333;
+  --bg-color: #0a0a1a;
+  --bg-gradient: linear-gradient(135deg, #0a0a1a 0%, #0f0f1a 100%);
+  --text-color: #e6e6e6;
   --header-gradient-start: #3498db;
   --header-gradient-end: #2c3e50;
-  --card-bg: rgba(255, 255, 255, 0.85);
-  --card-border: rgba(255, 255, 255, 0.5);
-  --icon-color: #3498db;
-  --icon-hover-color: #2c3e50;
-  --footer-border: rgba(0, 0, 0, 0.05);
-  --shadow-color: rgba(0, 0, 0, 0.07);
-  --shadow-hover-color: rgba(0, 0, 0, 0.15);
-  --particle-color: rgba(52, 152, 219, 0.3); /* Azul claro */
+  --card-bg: rgba(18, 18, 31, 0.7);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --icon-color: #00ff41; /* Verde neón para alto contraste */
+  --icon-hover-color: #ffffff;
+  --footer-border: rgba(255, 255, 255, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --shadow-hover-color: rgba(0, 0, 0, 0.4);
+  --particle-color: rgba(0, 255, 65, 0.4); /* Verde neón */
 }
 
-/* Tema oscuro */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-color: #0a0a1a;
-    --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    --text-color: #ecf0f1;
-    --header-gradient-start: #3498db;
-    --header-gradient-end: #2c3e50;
-    --card-bg: rgba(30, 30, 46, 0.85);
-    --card-border: rgba(255, 255, 255, 0.1);
-    --icon-color: #3498db;
-    --icon-hover-color: #ecf0f1;
-    --footer-border: rgba(255, 255, 255, 0.1);
-    --shadow-color: rgba(0, 0, 0, 0.2);
-    --shadow-hover-color: rgba(0, 0, 0, 0.3);
-    --particle-color: rgba(106, 90, 205, 0.4); /* Morado neón */
-  }
-}
-
-/* Fondo blanco puro */
+/* Fondo negro sólido */
 body {
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
   color: var(--text-color);
@@ -53,7 +34,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Capa de fondo difuminado (como en la captura) */
+/* Capa de fondo difuminado (opcional, si quieres un efecto de profundidad) */
 body::before {
   content: '';
   position: fixed;
@@ -65,7 +46,7 @@ body::before {
   background: var(--bg-gradient);
   backdrop-filter: blur(60px);
   -webkit-backdrop-filter: blur(60px);
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 /* Efecto de vidrio en el cuerpo */
@@ -112,7 +93,7 @@ header {
 header h1 {
   font-size: 3rem;
   font-weight: 700;
-  color: #2c3e50;
+  color: #ffffff;
   margin-bottom: 12px;
   background: linear-gradient(135deg, var(--header-gradient-start), var(--header-gradient-end));
   -webkit-background-clip: text;
@@ -122,7 +103,7 @@ header h1 {
 
 header p {
   font-size: 1.2rem;
-  color: #555;
+  color: #bdc3c7;
   max-width: 600px;
   margin: 0 auto;
   font-weight: 500;
@@ -199,7 +180,7 @@ header p {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
   transition: left 0.7s;
 }
 
@@ -210,7 +191,7 @@ header p {
 .tool-card:hover {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 16px 40px var(--shadow-hover-color);
-  border-color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.2);
   z-index: 1;
 }
 
@@ -228,13 +209,13 @@ header p {
 .tool-card h2 {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #2c3e50;
+  color: #ffffff;
   margin-bottom: 12px;
   line-height: 1.3;
 }
 
 .tool-card p {
-  color: #666;
+  color: #bdc3c7;
   font-size: 0.95rem;
   font-weight: 500;
   margin-top: 0;
