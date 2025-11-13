@@ -5,14 +5,60 @@
   box-sizing: border-box;
 }
 
-/* Fondo con gradiente sutil */
+/* Fondo con gradiente animado */
 body {
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
   color: #333;
   line-height: 1.7;
   padding: 20px;
   min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Capa de fondo animado */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  opacity: 0.9;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Opcional: Partículas flotantes */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(52, 152, 219, 0.1) 0%, transparent 10%),
+    radial-gradient(circle at 90% 80%, rgba(46, 204, 113, 0.1) 0%, transparent 10%),
+    radial-gradient(circle at 50% 50%, rgba(155, 89, 182, 0.1) 0%, transparent 10%);
+  animation: floatParticles 20s ease-in-out infinite;
+}
+
+@keyframes floatParticles {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.6; }
+  25% { transform: translateY(-20px) translateX(10px); }
+  50% { transform: translateY(0) translateX(-10px); }
+  75% { transform: translateY(20px) translateX(5px); }
 }
 
 /* Encabezado mejorado */
@@ -58,7 +104,7 @@ header p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: white;
+  background: rgba(255, 255, 255, 0.85);
   border-radius: 18px;
   padding: 32px;
   text-decoration: none;
