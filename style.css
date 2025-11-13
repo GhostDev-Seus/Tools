@@ -129,13 +129,6 @@ header p {
   line-height: 1.6;
 }
 
-/* Modo oscuro para header */
-@media (prefers-color-scheme: dark) {
-  header p {
-    color: #bdc3c7;
-  }
-}
-
 /* Grid de herramientas mejorado */
 .tools-grid {
   display: grid;
@@ -250,17 +243,6 @@ header p {
   padding: 0 12px;
 }
 
-/* Modo oscuro para tarjetas */
-@media (prefers-color-scheme: dark) {
-  .tool-card h2 {
-    color: #ecf0f1;
-  }
-
-  .tool-card p {
-    color: #bdc3c7;
-  }
-}
-
 /* Footer mejorado */
 footer {
   text-align: center;
@@ -271,13 +253,6 @@ footer {
   font-weight: 500;
   border-top: 1px solid var(--footer-border);
   animation: fadeInUp 0.8s ease-out 0.3s both;
-}
-
-/* Modo oscuro para footer */
-@media (prefers-color-scheme: dark) {
-  footer {
-    color: #bdc3c7;
-  }
 }
 
 /* Animaciones */
