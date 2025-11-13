@@ -5,17 +5,52 @@
   box-sizing: border-box;
 }
 
+/* Variables CSS para temas */
+:root {
+  --bg-color: #ffffff;
+  --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+  --text-color: #333;
+  --header-gradient-start: #3498db;
+  --header-gradient-end: #2c3e50;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --card-border: rgba(255, 255, 255, 0.5);
+  --icon-color: #3498db;
+  --icon-hover-color: #2c3e50;
+  --footer-border: rgba(0, 0, 0, 0.05);
+  --shadow-color: rgba(0, 0, 0, 0.07);
+  --shadow-hover-color: rgba(0, 0, 0, 0.15);
+  --particle-color: rgba(52, 152, 219, 0.3); /* Azul claro */
+}
+
+/* Tema oscuro */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #0a0a1a;
+    --bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    --text-color: #ecf0f1;
+    --header-gradient-start: #3498db;
+    --header-gradient-end: #2c3e50;
+    --card-bg: rgba(30, 30, 46, 0.85);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --icon-color: #3498db;
+    --icon-hover-color: #ecf0f1;
+    --footer-border: rgba(255, 255, 255, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --shadow-hover-color: rgba(0, 0, 0, 0.3);
+    --particle-color: rgba(106, 90, 205, 0.4); /* Morado neón */
+  }
+}
+
 /* Fondo blanco puro */
 body {
   font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
-  color: #333;
+  color: var(--text-color);
   line-height: 1.7;
   padding: 20px;
   min-height: 100vh;
-  background: #ffffff; /* Fondo blanco sólido */
+  background: var(--bg-color);
   position: relative;
   overflow-x: hidden;
-  overflow-y: auto;
 }
 
 /* Capa de fondo difuminado (como en la captura) */
@@ -27,7 +62,7 @@ body::before {
   width: 100%;
   height: 100%;
   z-index: -1;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+  background: var(--bg-gradient);
   backdrop-filter: blur(60px);
   -webkit-backdrop-filter: blur(60px);
   opacity: 0.8;
@@ -56,7 +91,7 @@ body {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: rgba(52, 152, 219, 0.3);
+  background: var(--particle-color);
   animation: float 10s ease-in-out infinite;
 }
 
@@ -79,7 +114,7 @@ header h1 {
   font-weight: 700;
   color: #2c3e50;
   margin-bottom: 12px;
-  background: linear-gradient(135deg, #3498db, #2c3e50);
+  background: linear-gradient(135deg, var(--header-gradient-start), var(--header-gradient-end));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.5px;
@@ -92,6 +127,13 @@ header p {
   margin: 0 auto;
   font-weight: 500;
   line-height: 1.6;
+}
+
+/* Modo oscuro para header */
+@media (prefers-color-scheme: dark) {
+  header p {
+    color: #bdc3c7;
+  }
 }
 
 /* Grid de herramientas mejorado */
@@ -121,12 +163,12 @@ header p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--card-bg);
   border-radius: 18px;
   padding: 32px;
   text-decoration: none;
   color: inherit;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 8px 28px var(--shadow-color);
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   border: none;
   text-align: center;
@@ -135,7 +177,7 @@ header p {
   overflow: hidden;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--card-border);
   opacity: 0;
   transform: translateY(20px);
 }
@@ -174,7 +216,7 @@ header p {
 
 .tool-card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 16px 40px var(--shadow-hover-color);
   border-color: rgba(255, 255, 255, 0.8);
   z-index: 1;
 }
@@ -182,12 +224,12 @@ header p {
 .tool-card i {
   font-size: 2.8rem;
   margin-bottom: 16px;
-  color: #3498db;
+  color: var(--icon-color);
   transition: color 0.3s;
 }
 
 .tool-card:hover i {
-  color: #2c3e50;
+  color: var(--icon-hover-color);
 }
 
 .tool-card h2 {
@@ -208,6 +250,17 @@ header p {
   padding: 0 12px;
 }
 
+/* Modo oscuro para tarjetas */
+@media (prefers-color-scheme: dark) {
+  .tool-card h2 {
+    color: #ecf0f1;
+  }
+
+  .tool-card p {
+    color: #bdc3c7;
+  }
+}
+
 /* Footer mejorado */
 footer {
   text-align: center;
@@ -216,8 +269,15 @@ footer {
   color: #888;
   font-size: 0.9rem;
   font-weight: 500;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-top: 1px solid var(--footer-border);
   animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+/* Modo oscuro para footer */
+@media (prefers-color-scheme: dark) {
+  footer {
+    color: #bdc3c7;
+  }
 }
 
 /* Animaciones */
