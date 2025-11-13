@@ -1,42 +1,86 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Comparador de Código - Diff Viewer</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔍 Comparador de Código</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
 </head>
-<body>
-
+<body class="dark-theme">
   <div class="container">
-    <h1>Comparador de Código</h1>
+    <header>
+      <h1>🔍 Comparador de Código</h1>
+      <p>Compara dos bloques de código y resalta las diferencias</p>
+    </header>
 
-    <div class="diff-container">
-      <!-- Panel Izquierdo -->
-      <div class="editor-panel">
-        <div class="panel-header">Código Original</div>
-        <div class="code-container">
-          <div class="line-numbers" id="leftLineNumbers"></div>
-          <div class="code-lines" id="leftCode"></div>
-        </div>
-        <textarea id="leftInput" placeholder="Pega el código original aquí..." aria-label="Código original"></textarea>
+    <div class="controls">
+      <div class="control-group">
+        <label for="language">Lenguaje:</label>
+        <select id="language">
+          <option value="javascript">JavaScript</option>
+          <option value="python">Python</option>
+          <option value="html">HTML</option>
+          <option value="css">CSS</option>
+          <option value="sql">SQL</option>
+          <option value="json">JSON</option>
+          <option value="php">PHP</option>
+          <option value="java">Java</option>
+          <option value="csharp">C#</option>
+          <option value="go">Go</option>
+        </select>
       </div>
 
-      <!-- Panel Derecho -->
-      <div class="editor-panel">
-        <div class="panel-header">Código Modificado</div>
-        <div class="code-container">
-          <div class="line-numbers" id="rightLineNumbers"></div>
-          <div class="code-lines" id="rightCode"></div>
-        </div>
-        <textarea id="rightInput" placeholder="Pega el código modificado aquí..." aria-label="Código modificado"></textarea>
+      <div class="control-group">
+        <button id="swapBtn" class="btn btn-secondary">
+          <i class="fas fa-exchange-alt"></i> Intercambiar
+        </button>
+        <button id="clearBtn" class="btn btn-danger">
+          <i class="fas fa-trash"></i> Limpiar Todo
+        </button>
       </div>
     </div>
+
+    <div class="code-comparison">
+      <div class="code-panel left-panel">
+        <div class="panel-header">
+          <span class="panel-title">Código Original</span>
+          <button id="copyLeftBtn" class="btn btn-sm btn-success">
+            <i class="fas fa-copy"></i> Copiar
+          </button>
+        </div>
+        <textarea id="leftCode" class="code-input" placeholder="Pega tu código aquí...">function saludar(nombre) {
+  console.log("Hola " + nombre);
+}</textarea>
+        <pre class="code-output"><code id="leftOutput" class="language-javascript"></code></pre>
+      </div>
+
+      <div class="diff-indicator">
+        <i class="fas fa-code-compare"></i>
+      </div>
+
+      <div class="code-panel right-panel">
+        <div class="panel-header">
+          <span class="panel-title">Código Modificado</span>
+          <button id="copyRightBtn" class="btn btn-sm btn-success">
+            <i class="fas fa-copy"></i> Copiar
+          </button>
+        </div>
+        <textarea id="rightCode" class="code-input" placeholder="Pega el código modificado aquí...">function saludar(nombre) {
+  console.log("¡Hola " + nombre + "!");
+}</textarea>
+        <pre class="code-output"><code id="rightOutput" class="language-javascript"></code></pre>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2025 Comparador de Código — GhostDev 👻</p>
+    </footer>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
