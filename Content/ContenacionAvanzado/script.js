@@ -244,4 +244,13 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCopyButtonState();
     updateInputCounter();
     updateResultCounter();
+
+    // Ejecutar Boton menu inicio
+    
+    document.getElementById("Menu").addEventListener("click", function () {
+    var url = 'https://tools-y72x.onrender.com/';
+    window.location.href = url; // Redirige a la URL
+    });
+
+
 });
