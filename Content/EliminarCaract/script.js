@@ -67,3 +67,10 @@ inputText.addEventListener('keydown', (e) => {
     updateOutput();
   }
 });
+
+   // Ejecutar Boton menu inicio
+    
+    document.getElementById("Menu").addEventListener("click", function () {
+    var url = 'https://tools-y72x.onrender.com/';
+    window.location.href = url; // Redirige a la URL
+    });

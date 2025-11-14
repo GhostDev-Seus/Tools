@@ -109,3 +109,8 @@ inputSQL.addEventListener('keydown', (e) => {
     updateOutput();
   }
 });
+
+document.getElementById("Menu").addEventListener("click", function () {
+  var url = 'https://tools-y72x.onrender.com/';
+  window.location.href = url; // Redirige a la URL
+});

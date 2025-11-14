@@ -1,261 +1,343 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🔒 TextCrypt - Encripta y Desencripta Texto</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#6366f1', // indigo-500
-          }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🔒 TextCrypt - Encripta y Desencripta Texto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#6366f1", // indigo-500
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Pequeña mejora visual: textarea con scroll suave */
+      textarea {
+        resize: vertical;
+      }
+
+      #Menu {
+        width: 100%;
+        padding: 14px 20px;
+        color: white;
+        border: none;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: all var(--transition-speed) ease;
+        font-size: 1rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--box-shadow);
+        position: relative;
+        overflow: hidden;
+        background: var(--btn-primary-bg);
+        margin-top: 10px;
+      }
+
+      #Menu::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.7s;
+      }
+
+      #Menu:hover::before {
+        left: 100%;
+      }
+
+      #Menu:hover:not(:disabled) {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      /* --- Responsive para el botón de menú --- */
+      @media (max-width: 768px) {
+        #Menu {
+          margin-top: 15px;
         }
       }
-    }
-  </script>
-  <style>
-    /* Pequeña mejora visual: textarea con scroll suave */
-    textarea {
-      resize: vertical;
-    }
-  </style>
-</head>
-<body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
-  <div class="w-full max-w-2xl bg-white rounded-xl shadow-lg p-6 md:p-8">
-    <div class="text-center mb-8">
-      <h1 class="text-3xl font-bold text-gray-800 mb-2">🔒 TextCrypt</h1>
-      <p class="text-gray-600">Encripta y desencripta texto de forma segura en tu navegador</p>
-    </div>
+    </style>
+  </head>
+  <body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-2xl bg-white rounded-xl shadow-lg p-6 md:p-8">
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">🔒 TextCrypt</h1>
+        <p class="text-gray-600">
+          Encripta y desencripta texto de forma segura en tu navegador
+        </p>
+        <button id="Menu">Menu principal</button>
+      </div>
 
-    <!-- Input de clave -->
-    <div class="mb-6">
-      <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Contraseña (clave secreta)</label>
-      <input
-        type="password"
-        id="password"
-        placeholder="Ingresa una contraseña fuerte"
-        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:outline-none"
-      />
-      <p class="mt-2 text-xs text-gray-500">Usa la misma contraseña para encriptar y desencriptar.</p>
-    </div>
-
-    <!-- Input de texto -->
-    <div class="mb-6">
-      <label for="inputText" class="block text-sm font-medium text-gray-700 mb-2">Texto a procesar</label>
-      <textarea
-        id="inputText"
-        rows="4"
-        placeholder="Escribe o pega tu texto aquí..."
-        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:outline-none"
-      ></textarea>
-    </div>
-
-    <!-- Botones -->
-    <div class="flex flex-col sm:flex-row gap-3 mb-6">
-      <button
-        id="encryptBtn"
-        class="flex-1 bg-primary hover:bg-indigo-600 text-white font-semibold py-3 px-4 rounded-lg transition flex items-center justify-center gap-2"
-      >
-        <i class="fas fa-lock"></i> Encriptar
-      </button>
-      <button
-        id="decryptBtn"
-        class="flex-1 bg-gray-700 hover:bg-gray-800 text-white font-semibold py-3 px-4 rounded-lg transition flex items-center justify-center gap-2"
-      >
-        <i class="fas fa-unlock"></i> Desencriptar
-      </button>
-      <button
-        id="clearBtn"
-        class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-4 rounded-lg transition flex items-center justify-center gap-2"
-      >
-        <i class="fas fa-trash-alt"></i> Borrar
-      </button>
-    </div>
-
-    <!-- Resultado -->
-    <div class="mb-4">
-      <label class="block text-sm font-medium text-gray-700 mb-2">Resultado</label>
-      <div class="relative">
-        <textarea
-          id="outputText"
-          rows="4"
-          readonly
-          class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg font-mono text-sm"
-        ></textarea>
-        <button
-          id="copyBtn"
-          class="absolute top-3 right-3 bg-gray-200 hover:bg-gray-300 p-1.5 rounded-md transition"
-          title="Copiar al portapapeles"
+      <!-- Input de clave -->
+      <div class="mb-6">
+        <label
+          for="password"
+          class="block text-sm font-medium text-gray-700 mb-2"
+          >Contraseña (clave secreta)</label
         >
-          <i class="fas fa-copy text-gray-600"></i>
+        <input
+          type="password"
+          id="password"
+          placeholder="Ingresa una contraseña fuerte"
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:outline-none"
+        />
+        <p class="mt-2 text-xs text-gray-500">
+          Usa la misma contraseña para encriptar y desencriptar.
+        </p>
+      </div>
+
+      <!-- Input de texto -->
+      <div class="mb-6">
+        <label
+          for="inputText"
+          class="block text-sm font-medium text-gray-700 mb-2"
+          >Texto a procesar</label
+        >
+        <textarea
+          id="inputText"
+          rows="4"
+          placeholder="Escribe o pega tu texto aquí..."
+          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:outline-none"
+        ></textarea>
+      </div>
+
+      <!-- Botones -->
+      <div class="flex flex-col sm:flex-row gap-3 mb-6">
+        <button
+          id="encryptBtn"
+          class="flex-1 bg-primary hover:bg-indigo-600 text-white font-semibold py-3 px-4 rounded-lg transition flex items-center justify-center gap-2"
+        >
+          <i class="fas fa-lock"></i> Encriptar
+        </button>
+        <button
+          id="decryptBtn"
+          class="flex-1 bg-gray-700 hover:bg-gray-800 text-white font-semibold py-3 px-4 rounded-lg transition flex items-center justify-center gap-2"
+        >
+          <i class="fas fa-unlock"></i> Desencriptar
+        </button>
+        <button
+          id="clearBtn"
+          class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-4 rounded-lg transition flex items-center justify-center gap-2"
+        >
+          <i class="fas fa-trash-alt"></i> Borrar
         </button>
       </div>
+
+      <!-- Resultado -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 mb-2"
+          >Resultado</label
+        >
+        <div class="relative">
+          <textarea
+            id="outputText"
+            rows="4"
+            readonly
+            class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg font-mono text-sm"
+          ></textarea>
+          <button
+            id="copyBtn"
+            class="absolute top-3 right-3 bg-gray-200 hover:bg-gray-300 p-1.5 rounded-md transition"
+            title="Copiar al portapapeles"
+          >
+            <i class="fas fa-copy text-gray-600"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mensajes -->
+      <div id="message" class="text-center min-h-6 text-sm font-medium"></div>
     </div>
 
-    <!-- Mensajes -->
-    <div id="message" class="text-center min-h-6 text-sm font-medium"></div>
-  </div>
+    <script>
+      // Elementos del DOM
+      const passwordInput = document.getElementById("password");
+      const inputText = document.getElementById("inputText");
+      const outputText = document.getElementById("outputText");
+      const encryptBtn = document.getElementById("encryptBtn");
+      const decryptBtn = document.getElementById("decryptBtn");
+      const clearBtn = document.getElementById("clearBtn");
+      const copyBtn = document.getElementById("copyBtn");
+      const messageEl = document.getElementById("message");
 
-  <script>
-    // Elementos del DOM
-    const passwordInput = document.getElementById('password');
-    const inputText = document.getElementById('inputText');
-    const outputText = document.getElementById('outputText');
-    const encryptBtn = document.getElementById('encryptBtn');
-    const decryptBtn = document.getElementById('decryptBtn');
-    const clearBtn = document.getElementById('clearBtn');
-    const copyBtn = document.getElementById('copyBtn');
-    const messageEl = document.getElementById('message');
-
-    // Mostrar mensaje temporal
-    function showMessage(text, isError = false) {
-      messageEl.textContent = text;
-      messageEl.className = `text-center min-h-6 text-sm font-medium mt-2 ${
-        isError ? 'text-red-600' : 'text-green-600'
-      }`;
-      if (!isError) {
-        setTimeout(() => {
-          if (messageEl.textContent === text) messageEl.textContent = '';
-        }, 3000);
-      }
-    }
-
-    // Derivar clave usando PBKDF2
-    async function deriveKey(password, salt) {
-      const enc = new TextEncoder();
-      const keyMaterial = await crypto.subtle.importKey(
-        'raw',
-        enc.encode(password),
-        { name: 'PBKDF2' },
-        false,
-        ['deriveKey']
-      );
-      return await crypto.subtle.deriveKey(
-        {
-          name: 'PBKDF2',
-          salt: salt,
-          iterations: 100000,
-          hash: 'SHA-256'
-        },
-        keyMaterial,
-        { name: 'AES-GCM', length: 256 },
-        false,
-        ['encrypt', 'decrypt']
-      );
-    }
-
-    // Encriptar
-    async function encryptText() {
-      const password = passwordInput.value;
-      const plaintext = inputText.value;
-
-      if (!password || !plaintext) {
-        showMessage('Ingresa una contraseña y texto.', true);
-        return;
+      // Mostrar mensaje temporal
+      function showMessage(text, isError = false) {
+        messageEl.textContent = text;
+        messageEl.className = `text-center min-h-6 text-sm font-medium mt-2 ${
+          isError ? "text-red-600" : "text-green-600"
+        }`;
+        if (!isError) {
+          setTimeout(() => {
+            if (messageEl.textContent === text) messageEl.textContent = "";
+          }, 3000);
+        }
       }
 
-      try {
-        const salt = crypto.getRandomValues(new Uint8Array(16));
-        const iv = crypto.getRandomValues(new Uint8Array(12));
-        const key = await deriveKey(password, salt);
+      // Derivar clave usando PBKDF2
+      async function deriveKey(password, salt) {
         const enc = new TextEncoder();
-        const ciphertext = await crypto.subtle.encrypt(
-          { name: 'AES-GCM', iv: iv },
-          key,
-          enc.encode(plaintext)
+        const keyMaterial = await crypto.subtle.importKey(
+          "raw",
+          enc.encode(password),
+          { name: "PBKDF2" },
+          false,
+          ["deriveKey"]
         );
-
-        const result = new Uint8Array(salt.length + iv.length + ciphertext.byteLength);
-        result.set(salt, 0);
-        result.set(iv, salt.length);
-        result.set(new Uint8Array(ciphertext), salt.length + iv.length);
-
-        const base64 = btoa(String.fromCharCode(...result));
-        outputText.value = base64;
-        showMessage('Texto encriptado con éxito ✅');
-      } catch (err) {
-        console.error(err);
-        showMessage('Error al encriptar ❌', true);
-      }
-    }
-
-    // Desencriptar
-    async function decryptText() {
-      const password = passwordInput.value;
-      const base64Input = inputText.value;
-
-      if (!password || !base64Input) {
-        showMessage('Ingresa una contraseña y texto encriptado.', true);
-        return;
+        return await crypto.subtle.deriveKey(
+          {
+            name: "PBKDF2",
+            salt: salt,
+            iterations: 100000,
+            hash: "SHA-256",
+          },
+          keyMaterial,
+          { name: "AES-GCM", length: 256 },
+          false,
+          ["encrypt", "decrypt"]
+        );
       }
 
-      try {
-        const binary = atob(base64Input);
-        const bytes = new Uint8Array(binary.length);
-        for (let i = 0; i < binary.length; i++) {
-          bytes[i] = binary.charCodeAt(i);
+      // Encriptar
+      async function encryptText() {
+        const password = passwordInput.value;
+        const plaintext = inputText.value;
+
+        if (!password || !plaintext) {
+          showMessage("Ingresa una contraseña y texto.", true);
+          return;
         }
 
-        if (bytes.length < 28) {
-          throw new Error('Texto encriptado inválido');
+        try {
+          const salt = crypto.getRandomValues(new Uint8Array(16));
+          const iv = crypto.getRandomValues(new Uint8Array(12));
+          const key = await deriveKey(password, salt);
+          const enc = new TextEncoder();
+          const ciphertext = await crypto.subtle.encrypt(
+            { name: "AES-GCM", iv: iv },
+            key,
+            enc.encode(plaintext)
+          );
+
+          const result = new Uint8Array(
+            salt.length + iv.length + ciphertext.byteLength
+          );
+          result.set(salt, 0);
+          result.set(iv, salt.length);
+          result.set(new Uint8Array(ciphertext), salt.length + iv.length);
+
+          const base64 = btoa(String.fromCharCode(...result));
+          outputText.value = base64;
+          showMessage("Texto encriptado con éxito ✅");
+        } catch (err) {
+          console.error(err);
+          showMessage("Error al encriptar ❌", true);
+        }
+      }
+
+      // Desencriptar
+      async function decryptText() {
+        const password = passwordInput.value;
+        const base64Input = inputText.value;
+
+        if (!password || !base64Input) {
+          showMessage("Ingresa una contraseña y texto encriptado.", true);
+          return;
         }
 
-        const salt = bytes.slice(0, 16);
-        const iv = bytes.slice(16, 28);
-        const ciphertext = bytes.slice(28);
+        try {
+          const binary = atob(base64Input);
+          const bytes = new Uint8Array(binary.length);
+          for (let i = 0; i < binary.length; i++) {
+            bytes[i] = binary.charCodeAt(i);
+          }
 
-        const key = await deriveKey(password, salt);
-        const decrypted = await crypto.subtle.decrypt(
-          { name: 'AES-GCM', iv: iv },
-          key,
-          ciphertext
-        );
+          if (bytes.length < 28) {
+            throw new Error("Texto encriptado inválido");
+          }
 
-        const dec = new TextDecoder();
-        outputText.value = dec.decode(decrypted);
-        showMessage('Texto desencriptado con éxito ✅');
-      } catch (err) {
-        console.error(err);
-        showMessage('Contraseña incorrecta o texto no válido ❌', true);
+          const salt = bytes.slice(0, 16);
+          const iv = bytes.slice(16, 28);
+          const ciphertext = bytes.slice(28);
+
+          const key = await deriveKey(password, salt);
+          const decrypted = await crypto.subtle.decrypt(
+            { name: "AES-GCM", iv: iv },
+            key,
+            ciphertext
+          );
+
+          const dec = new TextDecoder();
+          outputText.value = dec.decode(decrypted);
+          showMessage("Texto desencriptado con éxito ✅");
+        } catch (err) {
+          console.error(err);
+          showMessage("Contraseña incorrecta o texto no válido ❌", true);
+        }
       }
-    }
 
-    // Copiar al portapapeles
-    copyBtn.addEventListener('click', () => {
-      if (outputText.value) {
-        navigator.clipboard.writeText(outputText.value).then(() => {
-          showMessage('Copiado al portapapeles ✅');
-        }).catch(() => {
-          showMessage('No se pudo copiar ❌', true);
-        });
+      // Copiar al portapapeles
+      copyBtn.addEventListener("click", () => {
+        if (outputText.value) {
+          navigator.clipboard
+            .writeText(outputText.value)
+            .then(() => {
+              showMessage("Copiado al portapapeles ✅");
+            })
+            .catch(() => {
+              showMessage("No se pudo copiar ❌", true);
+            });
+        }
+      });
+
+      // Borrar todos los campos
+      function clearAll() {
+        passwordInput.value = "";
+        inputText.value = "";
+        outputText.value = "";
+        messageEl.textContent = "";
+        passwordInput.focus();
+        showMessage("Campos limpiados ✨");
       }
-    });
 
-    // Borrar todos los campos
-    function clearAll() {
-      passwordInput.value = '';
-      inputText.value = '';
-      outputText.value = '';
-      messageEl.textContent = '';
-      passwordInput.focus();
-      showMessage('Campos limpiados ✨');
-    }
+      // Event listeners
+      encryptBtn.addEventListener("click", encryptText);
+      decryptBtn.addEventListener("click", decryptText);
+      clearBtn.addEventListener("click", clearAll);
 
-    // Event listeners
-    encryptBtn.addEventListener('click', encryptText);
-    decryptBtn.addEventListener('click', decryptText);
-    clearBtn.addEventListener('click', clearAll);
+      // Atajo: Ctrl+Enter para encriptar
+      inputText.addEventListener("keydown", (e) => {
+        if (e.ctrlKey && e.key === "Enter") {
+          encryptText();
+        }
+      });
 
-    // Atajo: Ctrl+Enter para encriptar
-    inputText.addEventListener('keydown', (e) => {
-      if (e.ctrlKey && e.key === 'Enter') {
-        encryptText();
-      }
-    });
-  </script>
-</body>
+      // Ejecutar Boton menu inicio
+
+      document.getElementById("Menu").addEventListener("click", function () {
+        var url = "https://tools-y72x.onrender.com/";
+        window.location.href = url; // Redirige a la URL
+      });
+    </script>
+  </body>
 </html>
