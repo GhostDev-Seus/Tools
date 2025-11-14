@@ -130,7 +130,7 @@ i {
 #Menu {
     width: 100%;
     padding: 14px 20px;
-    color: white;
+    color: rgb(12, 12, 12);
     border: none;
     border-radius: var(--border-radius);
     cursor: pointer;
